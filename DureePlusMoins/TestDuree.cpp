@@ -1,71 +1,73 @@
 /**
  *
- * \file     TestDuree.cpp
+ * \file    testDuree.cpp
  *
- * \authors  M. Laporte, D. Mathieu
+ * \authors M. Laporte
  *
- * \date     29/10/2007
+ * \date    02/04/2018
  *
- * \version  V1.0
+ * \version V2.0
  *
- * \brief    Test des operateurs + et -
+ * \brief  test de la classe Duree
  *
  **/
 #include <iostream>
-#include <iomanip>            // setw()
+#include <iomanip>   // setw()
 #include <vector>
-
-using namespace std;
 
 #include "Duree.h"
 
+using namespace std;
 using namespace nsUtil;
 
-#define classdef typedef
-
-namespace 
+namespace
 {
-    void testDuree (void)
-    {
-        Duree d1 (123);
-        Duree d2 (12);
+	void testDuree (void)
+	{
+		vector <Duree> vDurees;
+		
+		ULLong_t oneDuree;
+		for (cin >> oneDuree; ! cin.eof (); cin >> oneDuree)
+		{
+		    vDurees.push_back (oneDuree);
+		}
+		for (const Duree & duree : vDurees)
+		{
+		    duree.display;
+			cout << endl;
+		}
+		Duree d1 (0);
+		d1.incr (1);
+		cout << "Nbre sec. " << setw (6) << d1.getDuree ()
+			 << ", soit : ";
+		d1.display ();
+		cout << '\n';
 
-        d1.display ();
-        cout << " + ";
-        d2.display ();
-        cout << " = ";
-        (d1 + d2).display ();
-        cout << '\n';
+		d1.decr (1);
+		cout << "Nbre sec. " << setw (6) << d1.getDuree ()
+			 << ", soit : ";
+		d1.display ();
+		cout << '\n';
 
-        d2.display ();
-        cout << " + ";
-        d1.display ();
-        cout << " = ";
-        (d2 + d1).display ();
-        cout << '\n';
+		d1.incr (3662);
+		cout << "Nbre sec. " << setw (6) << d1.getDuree ()
+			 << ", soit : ";
+		d1.display ();
+		cout << '\n';
 
-        d1.display ();
-        cout << " - ";
-        d2.display ();
-        cout << " = ";
-        (d1 - d2).display ();
-        cout << '\n';
-
-        d2.display ();
-        cout << " - ";
-        d1.display ();
-        cout << " = ";
-        (d2 - d1).display ();
-        cout << '\n';
-
-    } // TestCDuree()
-
-} // namespace anonyme
+		d1.decr (10000);
+		cout << "Nbre sec. " << setw (6) << d1.getDuree ()
+			 << ", soit : ";
+		d1.display ();
+		cout << '\n';		
+					
+	} // testDuree()
+	
+} // namespace
 
 int main (void)
 {
-    testDuree ();
-
-    return 0;
-
+	testDuree ();
+	return 0;
+	
 } // main()
